@@ -12,13 +12,22 @@ body{
     background-size: cover;
     background-position: center;
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 /* カーソル */
 
 *{
-    cursor: url("Sky_cursor_01.svg") 4 4, auto;
+    cursor: none;
+}
+
+#cursor{
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background: url(Sky_cursor_none.svg) no-repeat center/contain;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
 }
 
 /* ヘッダー */
