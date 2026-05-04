@@ -18,21 +18,8 @@ body{
 /* カーソル */
 
 *{
-    cursor: url(Sky_cursor_02.svg) 4 4 auto;
+    cursor: url("Sky_cursor_02.svg") 4 4, auto;
 }
-
-/* *{
-    cursor: none;
-}
-
-#cursor{
-    position: fixed;
-    width: 32px;
-    height: 32px;
-    background: url(Sky_cursor_none.svg) no-repeat center/contain;
-    pointer-events: none;
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
-} */
 
 /* ヘッダー */
 
@@ -47,7 +34,7 @@ header{
 
 h1{
     display: inline-block;
-    color: #ffffff;
+    color: #FEFDF2;
     font-size: 1.8em;
     font-weight: 400;
     margin: 0 auto;
@@ -66,7 +53,7 @@ h1{
 }
 
 .menu_button span{
-    background-color: #ffffff;
+    background-color: #FEFDF2;
     transition: all 0.3s;
     position: absolute;
     height: 2px;
@@ -107,7 +94,7 @@ h1{
 /* 時計 */
 
 #clock{
-    color: #ffffff;
+    color: #FEFDF2;
     font-size: 1.2em;
     text-align: center;
 }
@@ -123,7 +110,7 @@ h1{
 }
 
 #today_location{
-    color: #ffffff;
+    color: #FEFDF2;
     font-size: 2em;
     font-weight: 400;
     position: absolute;

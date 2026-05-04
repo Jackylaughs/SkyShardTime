@@ -29,14 +29,6 @@ setTimeout(displayTime, 1000);
 
 displayTime();
 
-// カーソル
-
-// document.addEventListener("mousemove", (e) => {
-//     const cursor = document.querySelector("#cursor");
-//     cursor.style.left = (e.pageX - 7) + "px";
-//     cursor.style.top = (e.pageY - 4) + "px";
-// });
-
 // メニューボタン
 
 const menuButton = document.querySelector(".menu_button");
