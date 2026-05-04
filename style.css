@@ -18,6 +18,10 @@ body{
 /* カーソル */
 
 *{
+    cursor: url(Sky_cursor_02.svg) 4 4 auto;
+}
+
+/* *{
     cursor: none;
 }
 
@@ -28,7 +32,7 @@ body{
     background: url(Sky_cursor_none.svg) no-repeat center/contain;
     pointer-events: none;
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
-}
+} */
 
 /* ヘッダー */
 

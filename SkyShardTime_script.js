@@ -31,11 +31,11 @@ displayTime();
 
 // カーソル
 
-document.addEventListener("mousemove", (e) => {
-    const cursor = document.querySelector("#cursor");
-    cursor.style.left = (e.pageX - 7) + "px";
-    cursor.style.top = (e.pageY - 4) + "px";
-});
+// document.addEventListener("mousemove", (e) => {
+//     const cursor = document.querySelector("#cursor");
+//     cursor.style.left = (e.pageX - 7) + "px";
+//     cursor.style.top = (e.pageY - 4) + "px";
+// });
 
 // メニューボタン
 
