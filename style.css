@@ -9,6 +9,10 @@
 body{
     font-family: "Zen Maru Gothic";
     background-color: #808080;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 100vh;
 }
 
 /* カーソル */
@@ -20,12 +24,11 @@ body{
 /* ヘッダー */
 
 header{
-    margin-top: 0.4em;
+    padding-top: 0.4em;
 }
 
 .header_container{
     display: flex;
-    position: relative;
     align-items: center;
 }
 
@@ -41,11 +44,12 @@ h1{
 
 .menu_button{
     background-color: transparent;
-    border: 0;
+    border: none;
     position: absolute;
     right: 0.45em;
     margin: auto 0;
     padding: 24px;
+    z-index: 1;
 }
 
 .menu_button span{
@@ -54,7 +58,7 @@ h1{
     position: absolute;
     height: 2px;
     width: 24px;
-    z-index: 10;
+
 }
 
 .menu_button span:nth-of-type(1){
@@ -97,9 +101,13 @@ h1{
 
 /* メイン */
 
-/* .main_container{
-    
-} */
+.main_container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
 
 #today_location{
     color: #ffffff;

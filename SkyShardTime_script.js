@@ -8,15 +8,15 @@ let hour = now.getHours();
 let minute = now.getMinutes();
 let second = now.getSeconds();
 
-if(hour < 10){
+if (hour < 10){
     hour = "0" + hour;
 }
 
-if(minute < 10){
+if (minute < 10){
     minute = "0" + minute;
 }
 
-if(second < 10){
+if (second < 10){
     second = "0" + second;
 }
 
@@ -34,18 +34,32 @@ displayTime();
 const menuButton = document.querySelector(".menu_button");
 
 menuButton.addEventListener("click", () => {
-    menuButton.classList.toggle("open");
+    menuButton.classList.toggle ("open");
 });
 
 
 
 // 場所
 
-const now = new Date();
-const today = now.getDate();
-let venue = "";
+const los_now = new Date();
 
-switch (today){
+const formatter = new Intl.DateTimeFormat ("en-US", {
+    timeZone: "America/los_Angeles",
+    day: "numeric",
+    weekday: "short",
+});
+
+const parts = formatter.formatToParts (los_now);
+
+const los_today = Number (parts.find(part => part.type === "day").value); // ロスの日付
+const los_weekday = parts.find (part => part.type === "weekday").value; // ロスの曜日
+
+// console.log (los_today);
+// console.log (los_weekday);
+
+let venue ;
+
+switch (los_today){
     case 1:
     case 31:
         venue = "草原・洞窟";
@@ -138,4 +152,94 @@ switch (today){
         break;
 }
 
-document.getElementById("today_location").textContent = venue;
+// 闇の破片の種類
+
+let shardType ;
+
+if (los_today % 6 === 1) {
+    shardType = "赤A";
+} else if (los_today % 6 === 3) {
+    shardType = "赤B";
+} else if (los_today % 6 === 5) {
+    shardType = "赤C";
+} else if (los_today % 4 === 2) {
+    shardType = "黒A";
+} else if (los_today % 4 === 0) {
+    shardType = "黒B";
+}
+
+// console.log(shardType);
+
+// 開催判定
+
+let isEvent ;
+
+if (shardType === "赤A" && los_weekday !== "Mon" || los_weekday !== "Tue") {
+    isEvent = "赤A開催";
+} else if(shardType === "赤B" && los_weekday !== "Tue" || los_weekday !== "Wed") {
+    isEvent = "赤B開催";
+} else if(shardType === "赤C" && los_weekday !== "Wed" || los_weekday !== "Thu") {
+    isEvent = "赤C開催";
+} else if(shardType === "黒A" && los_weekday !== "Sun" || los_weekday !== "Mon") {
+    isEvent = "黒A開催";
+} else if(shardType === "黒B" && los_weekday !== "Sat" || los_weekday !== "Sun") {
+    isEvent = "黒B開催";
+} else {
+    isEvent = "開催なし";
+}
+
+// console.log(isEvent);
+
+// 背景
+
+if(isEvent !== "開催なし" && venue === "草原・洞窟"){
+    document.body.style.backgroundImage = "url('images/sougen_doukutu.jpg')";
+} else if(isEvent !== "開催なし" && venue === "雨林・神殿前"){
+    document.body.style.backgroundImage = "url('images/urin_shindenmae.jpg')";
+} else if(isEvent !== "開催なし" && venue === "峡谷・夢見"){
+    document.body.style.backgroundImage = "url('images/kyoukoku_yumemi.jpg')";
+} else if(isEvent !== "開催なし" && venue === "捨て地・最初のエリア"){
+    document.body.style.backgroundImage = "url('images/suteti_first.jpg')";
+} else if(isEvent !== "開催なし" && venue === "書庫・星月夜（海月の入り江）"){
+    document.body.style.backgroundImage = "url('images/syoko_kurage.jpg')";
+} else if(isEvent !== "開催なし" && venue === "草原・神殿前"){
+    document.body.style.backgroundImage = "url('images/sougen_sindenmae.jpg')";
+} else if(isEvent !== "開催なし" && venue === "雨林・神殿奥"){
+    document.body.style.backgroundImage = "url('images/urin_sindenoku.jpg')";
+} else if(isEvent !== "開催なし" && venue === "峡谷・スケートリンク"){
+    document.body.style.backgroundImage = "url('images/kyoukoku_icerink.jpg')";
+} else if(isEvent !== "開催なし" && venue === "捨て地・座礁船"){
+    document.body.style.backgroundImage = "url('images/suteti_zasyousen.jpg')";
+} else if(isEvent !== "開催なし" && venue === "書庫・星月夜（バラの先）"){
+    document.body.style.backgroundImage = "url('images/syoko_rose.jpg')";
+} else if(isEvent !== "開催なし" && venue === "草原・楽園"){
+    document.body.style.backgroundImage = "url('images/sougen_rakuen.jpg')";
+} else if(isEvent !== "開催なし" && venue === "雨林・小川"){
+    document.body.style.backgroundImage = "url('images/urin_ogawa.jpg')";
+} else if(isEvent !== "開催なし" && venue === "捨て地・戦場"){
+    document.body.style.backgroundImage = "url('images/suteti_senjou.jpg')";
+} else if(isEvent !== "開催なし" && venue === "草原・蝶々の住処"){
+    document.body.style.backgroundImage = "url('images/sougen_tyoutyo.jpg')";
+} else if(isEvent !== "開催なし" && venue === "雨林・晴れ間"){
+    document.body.style.backgroundImage = "url('images/urin_harema.jpg')";
+} else if(isEvent !== "開催なし" && venue === "捨て地・墓所"){
+    document.body.style.backgroundImage = "url('images/suteti_bosyo.jpg')";
+} else if(isEvent !== "開催なし" && venue === "草原・鳥の巣"){
+    document.body.style.backgroundImage = "url('images/sougen_torinosu.jpg')";
+} else if(isEvent !== "開催なし" && venue === "峡谷・隠者"){
+    document.body.style.backgroundImage = "url('images/kyoukoku_inja.jpg')";
+} else if(isEvent !== "開催なし" && venue === "雨林・ツリーハウス"){
+    document.body.style.backgroundImage = "url('images/urin_treehouse.jpg')";
+} else if(isEvent !== "開催なし" && venue === "捨て地・方舟"){
+    document.body.style.backgroundImage = "url('images/suteti_ark.jpg')";
+} else {
+    document.body.style.backgroundImage = "url('images/skyshardtime_bg.jpg')";
+}
+
+// 開催場所の表示
+
+if(isEvent !== "開催なし"){
+    document.getElementById("today_location").textContent = venue;
+} else {
+    document.getElementById("today_location").textContent = "開催なし";
+}
