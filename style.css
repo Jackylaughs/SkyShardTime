@@ -11,6 +11,12 @@ body{
     background-color: #808080;
 }
 
+/* カーソル */
+
+*{
+    cursor: url("Sky_cursor_01.svg") 4 4, auto;
+}
+
 /* ヘッダー */
 
 header{
@@ -91,11 +97,11 @@ h1{
 
 /* メイン */
 
-.main_container{
+/* .main_container{
     
-}
+} */
 
-.location{
+#today_location{
     color: #ffffff;
     font-size: 2em;
     font-weight: 400;
