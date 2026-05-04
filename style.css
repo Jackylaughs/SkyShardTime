@@ -11,6 +11,8 @@ body{
     background-color: #808080;
 }
 
+/* ヘッダー */
+
 header{
     margin-top: 0.4em;
 }
@@ -29,17 +31,65 @@ h1{
     margin: 0 auto;
 }
 
+/* メニューボタン */
+
 .menu_button{
+    background-color: transparent;
+    border: 0;
     position: absolute;
-    right: 1.4em;
+    right: 0.45em;
     margin: auto 0;
+    padding: 24px;
 }
+
+.menu_button span{
+    background-color: #ffffff;
+    transition: all 0.3s;
+    position: absolute;
+    height: 2px;
+    width: 24px;
+    z-index: 10;
+}
+
+.menu_button span:nth-of-type(1){
+    top: 16px;
+    right: 12px;
+}
+
+.menu_button span:nth-of-type(2){
+    top: 24px;
+    right: 12px;
+}
+
+.menu_button span:nth-of-type(3){
+    top: 32px;
+    right: 12px;
+}
+
+.menu_button.open span:nth-of-type(1){
+    transform: rotate(45deg);
+    top: 24px;
+}
+
+.menu_button.open span:nth-of-type(2){
+    transform: translateX(0.6em);
+    opacity: 0;
+}
+
+.menu_button.open span:nth-of-type(3){
+    transform: rotate(-45deg);
+    top: 24px;
+}
+
+/* 時計 */
 
 #clock{
     color: #ffffff;
     font-size: 1.2em;
     text-align: center;
 }
+
+/* メイン */
 
 .main_container{
     

@@ -1,3 +1,5 @@
+// 時計
+
 function displayTime(){
 const now = new Date();
 
@@ -24,3 +26,15 @@ document.getElementById("clock").textContent = currentTime;
 
 displayTime();
 setInterval(displayTime,1000);
+
+// メニューボタン
+
+const menuButton = document.querySelector(".menu_button");
+
+menuButton.addEventListener("click", () => {
+    menuButton.classList.toggle("open");
+});
+
+menuButton.classList.toggle("open");
+
+console.log("メニューボタンがクリックされました。");
