@@ -7,12 +7,13 @@
 }
 
 body{
+    color:#FEFDF2;
     font-family: "Zen Maru Gothic";
     background-color: #808080;
     background-size: cover;
     background-position: center;
-    position: relative;
     min-height: 100dvh;
+    min-width: 100%;
 }
 
 /* カーソル */
@@ -25,6 +26,9 @@ body{
 
 header{
     padding-top: 0.4em;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 }
 
 .header_container{
@@ -34,7 +38,6 @@ header{
 
 h1{
     display: inline-block;
-    color: #FEFDF2;
     font-size: 1.8em;
     font-weight: 400;
     margin: 0 auto;
@@ -51,7 +54,7 @@ h1{
     right: 0.45em;
     margin: auto 0;
     padding: 24px;
-    z-index: 1;
+    z-index: 10;
 }
 
 @media (hover: hover){ /* PC用 */
@@ -106,27 +109,94 @@ h1{
 /* 時計 */
 
 #clock{
-    color: #FEFDF2;
     font-size: 1.2em;
     text-align: center;
 }
 
 /* メイン */
 
-.main_container{
+.location_container{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
 }
 
 #today_location{
-    color: #FEFDF2;
     font-size: 2em;
     font-weight: 400;
     position: absolute;
     left: 1em;
     bottom: 2em;
     margin: 0;
+}
+
+@media (max-width: 600px){
+    #today_location{
+        font-size: 1.6em;
+    }
+}
+
+.event_container{
+    position: relative;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100dvh;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+#no_event{
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.event_1{
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 0 0.8em 0 0.8em;
+    border: 2px solid #FF0000;
+    border-radius: 2em;
+}
+
+.event_2{
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 0 0.8em 0 0.8em;
+    border: 2px solid #FF0000;
+    border-radius: 2em;
+}
+
+.event_3{
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 0 0.8em 0 0.8em;
+    border: 2px solid #FF0000;
+    border-radius: 2em;
 }
