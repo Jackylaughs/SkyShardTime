@@ -54,7 +54,13 @@ h1{
     z-index: 1;
 }
 
-.menu_button:hover{
+@media (hover: hover){ /* PC用 */
+    .menu_button:hover{
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.menu_button:active{ /* スマホ用 */
     background-color: rgba(0, 0, 0, 0.3);
 }
 

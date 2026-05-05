@@ -174,47 +174,47 @@ if (shardType === "赤A" && los_weekday !== "Mon" || los_weekday !== "Tue") {
 // 背景
 
 if(isEvent !== "開催なし" && venue === "草原・洞窟"){
-    document.body.style.backgroundImage = "url('images/sougen_doukutu.jpg')";
+    document.body.style.backgroundImage = "url('images/DP_cave.png')";
 } else if(isEvent !== "開催なし" && venue === "雨林・神殿前"){
-    document.body.style.backgroundImage = "url('images/urin_shindenmae.jpg')";
+    document.body.style.backgroundImage = "url('images/HF_boneyard.png')";
 } else if(isEvent !== "開催なし" && venue === "峡谷・夢見"){
-    document.body.style.backgroundImage = "url('images/kyoukoku_yumemi.jpg')";
+    document.body.style.backgroundImage = "url('images/VT_dream.png')";
 } else if(isEvent !== "開催なし" && venue === "捨て地・最初のエリア"){
-    document.body.style.backgroundImage = "url('images/suteti_first.jpg')";
+    document.body.style.backgroundImage = "url('images/GW_outer.png')";
 } else if(isEvent !== "開催なし" && venue === "書庫・星月夜（海月の入り江）"){
-    document.body.style.backgroundImage = "url('images/syoko_kurage.jpg')";
+    document.body.style.backgroundImage = "url('images/VK_jellyfish.png')";
 } else if(isEvent !== "開催なし" && venue === "草原・神殿前"){
-    document.body.style.backgroundImage = "url('images/sougen_sindenmae.jpg')";
+    document.body.style.backgroundImage = "url('images/DP_temple.png')";
 } else if(isEvent !== "開催なし" && venue === "雨林・神殿奥"){
-    document.body.style.backgroundImage = "url('images/urin_sindenoku.jpg')";
+    document.body.style.backgroundImage = "url('images/HF_temple.png')";
 } else if(isEvent !== "開催なし" && venue === "峡谷・スケートリンク"){
-    document.body.style.backgroundImage = "url('images/kyoukoku_icerink.jpg')";
+    document.body.style.backgroundImage = "url('images/VT_icerink.png')";
 } else if(isEvent !== "開催なし" && venue === "捨て地・座礁船"){
-    document.body.style.backgroundImage = "url('images/suteti_zasyousen.jpg')";
+    document.body.style.backgroundImage = "url('images/GW_crab.png')";
 } else if(isEvent !== "開催なし" && venue === "書庫・星月夜（バラの先）"){
-    document.body.style.backgroundImage = "url('images/syoko_rose.jpg')";
+    document.body.style.backgroundImage = "url('images/VK_desert.png')";
 } else if(isEvent !== "開催なし" && venue === "草原・楽園"){
-    document.body.style.backgroundImage = "url('images/sougen_rakuen.jpg')";
+    document.body.style.backgroundImage = "url('images/DP_sanctuary.png')";
 } else if(isEvent !== "開催なし" && venue === "雨林・小川"){
-    document.body.style.backgroundImage = "url('images/urin_ogawa.jpg')";
+    document.body.style.backgroundImage = "url('images/HF_brook.png')";
 } else if(isEvent !== "開催なし" && venue === "捨て地・戦場"){
-    document.body.style.backgroundImage = "url('images/suteti_senjou.jpg')";
+    document.body.style.backgroundImage = "url('images/GW_battlefield.png')";
 } else if(isEvent !== "開催なし" && venue === "草原・蝶々の住処"){
-    document.body.style.backgroundImage = "url('images/sougen_tyoutyo.jpg')";
+    document.body.style.backgroundImage = "url('images/DP_butterfly.png')";
 } else if(isEvent !== "開催なし" && venue === "雨林・晴れ間"){
-    document.body.style.backgroundImage = "url('images/urin_harema.jpg')";
+    document.body.style.backgroundImage = "url('images/HF_clearing.png')";
 } else if(isEvent !== "開催なし" && venue === "捨て地・墓所"){
-    document.body.style.backgroundImage = "url('images/suteti_bosyo.jpg')";
+    document.body.style.backgroundImage = "url('images/GW_graveyard.png')";
 } else if(isEvent !== "開催なし" && venue === "草原・鳥の巣"){
-    document.body.style.backgroundImage = "url('images/sougen_torinosu.jpg')";
+    document.body.style.backgroundImage = "url('images/DP_birdnest.png')";
 } else if(isEvent !== "開催なし" && venue === "峡谷・隠者"){
-    document.body.style.backgroundImage = "url('images/kyoukoku_inja.jpg')";
+    document.body.style.backgroundImage = "url('images/VT_hermit.png')";
 } else if(isEvent !== "開催なし" && venue === "雨林・ツリーハウス"){
-    document.body.style.backgroundImage = "url('images/urin_treehouse.jpg')";
+    document.body.style.backgroundImage = "url('images/HF_treehouse.png')";
 } else if(isEvent !== "開催なし" && venue === "捨て地・方舟"){
-    document.body.style.backgroundImage = "url('images/suteti_ark.jpg')";
+    document.body.style.backgroundImage = "url('images/GW_ark.png')";
 } else {
-    document.body.style.backgroundImage = "url('images/skyshardtime_bg.jpg')";
+    document.body.style.backgroundImage = "url('images/no_event.png')";
 }
 
 // 開催場所の表示
