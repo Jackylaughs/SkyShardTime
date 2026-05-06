@@ -24,7 +24,7 @@ const currentTime = hour + ":" + minute + ":" + second;
 
 document.getElementById("clock").textContent = currentTime;
 
-setTimeout(displayTime, 1000);
+setInterval(displayTime, 1000);
 }
 
 displayTime();
