@@ -1,0 +1,185 @@
+@charset "utf-8";
+
+.zen-maru-gothic-regular {
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+    color:#FEFDF2;
+    font-family: "Zen Maru Gothic";
+    background-color: #808080;
+    background-size: cover;
+    background-position: center;
+    min-height: 100dvh;
+    min-width: 100%;
+}
+
+
+
+/* カーソル */
+
+*{
+    cursor: url("Sky_cursor_02.svg") 4 4, auto;
+}
+
+
+
+/* ヘッダー */
+
+header{
+    padding-top: 0.4em;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.header_container{
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    display: inline-block;
+    font-size: 1.8em;
+    font-weight: 400;
+    margin: 0 auto;
+}
+
+
+
+/* メニューボタン */
+
+.menu_button{
+    background-color: transparent;
+    transition: all 0.3s;
+    border-radius: 5px;
+    border: none;
+    position: absolute;
+    right: 0.45em;
+    margin: auto 0;
+    padding: 24px;
+    z-index: 10;
+}
+
+@media (hover: hover){ /* PC用 */
+    .menu_button:hover{
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.menu_button:active{ /* スマホ用 */
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu_button span{
+    background-color: #FEFDF2;
+    transition: all 0.3s;
+    position: absolute;
+    height: 2px;
+    width: 24px;
+
+}
+
+.menu_button span:nth-of-type(1){
+    top: 16px;
+    right: 12px;
+}
+
+.menu_button span:nth-of-type(2){
+    top: 24px;
+    right: 12px;
+}
+
+.menu_button span:nth-of-type(3){
+    top: 32px;
+    right: 12px;
+}
+
+.menu_button.open span:nth-of-type(1){
+    transform: rotate(45deg);
+    top: 24px;
+}
+
+.menu_button.open span:nth-of-type(2){
+    transform: translateX(0.6em);
+    opacity: 0;
+}
+
+.menu_button.open span:nth-of-type(3){
+    transform: rotate(-45deg);
+    top: 24px;
+}
+
+/* 時計 */
+
+#clock{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+
+
+/* メイン */
+
+#today_location{
+    font-size: 2em;
+    font-weight: 400;
+    position: fixed;
+    left: 1em;
+    bottom: 2em;
+    margin: 0;
+}
+
+@media (max-width: 600px){
+    #today_location{
+        font-size: 1.6em;
+    }
+}
+
+.event_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#no_event{
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.event_1{
+    font-size: 2.5em;
+    font-weight: 400;
+    position: absolute;
+    padding: 0 0.8em 0 0.8em;
+    margin: 0;
+    border-radius: 2em;
+    top: 38%;
+}
+
+.event_2{
+    font-size: 2.5em;
+    font-weight: 400;
+    position: absolute;
+    margin: 0;
+    padding: 0 0.8em 0 0.8em;
+    border-radius: 2em;
+    top: 45%;
+}
+
+.event_3{
+    font-size: 2.5em;
+    font-weight: 400;
+    position: absolute;
+    padding: 0 0.8em 0 0.8em;
+    margin: 0;
+    border-radius: 2em;
+    top: 52%;
+}
