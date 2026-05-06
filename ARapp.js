@@ -37,9 +37,7 @@ menuButton.addEventListener("click", () => {
     menuButton.classList.toggle ("open");
 });
 
-
-
-// 場所
+// ロスの時間 { 曜日, 日付, 時間(秒) }
 
 function getLosTime(){
     const los_now = new Date();
@@ -62,19 +60,78 @@ function getLosTime(){
     const los_minute = Number (parts.find(part => part.type === "minute").value); // ロスの分
     const los_second = Number (parts.find(part => part.type === "second").value); // ロスの秒
 
-    return { los_weekday, los_today, los_hour, los_minute, los_second };
+    const los_time = los_hour * 3600 + los_minute * 60 + los_second; // ロスの時間を秒に変換
 
-    setTimeout(getLosTime, 1000);
+    return { los_weekday, los_today, los_time };
 }
 
-getLosTime();
+setInterval(getLosTime, 1000)
+// setInterval(() => {
+//     console.log(getLosTime());
+// }, 1000);
 
-console.log(getLosTime());
-console.log("曜日: " + getLosTime().los_weekday);
-console.log("日付: " + getLosTime().los_today);
-console.log("時間: " + getLosTime().los_hour);
-console.log("分: " + getLosTime().los_minute);
-console.log("秒: " + getLosTime().los_second);
+
+// イベントの情報
+
+const isEvent = [
+    {
+        type: "赤A", 
+        time1: [28200, 42000],
+        time2: [49800, 63600],
+        time3: [71400, 85200],
+        skip: ["Mon", "Tue"]
+    },
+    {
+        type: "赤B",
+        time1: [9000, 22800],
+        time2: [30600, 44400],
+        time3: [52200, 66000],
+        skip: ["Tue", "Wed"]
+    },
+    {
+        type: "赤C",
+        time1: [13200, 27000],
+        time2: [34800, 48600],
+        time3: [56400, 70200],
+        skip: ["Wed", "Thu"]
+    },
+    {
+        type: "黒A",
+        time1: [8400, 22200],
+        time2: [37200, 51000],
+        time3: [66000, 79800],
+        skip: ["Sun", "Mon"]
+    },
+    {
+        type: "黒B",
+        time1: [7200, 21000],
+        time2: [36000, 49800],
+        time3: [64800, 78600],
+        skip: ["Sun", "Sat"]
+    }
+];
+
+// イベントの種類
+
+let eventType ;
+
+if(getLosTime().los_today % 6 === 1 && !isEvent[0].skip.includes(getLosTime().los_weekday)){ // 今日が1日かつ月火じゃなかったら
+    eventType = isEvent[0]; // イベントは赤A
+} else if(getLosTime().los_today % 6 === 3 && !isEvent[1].skip.includes(getLosTime().los_weekday)){ // 今日が3日かつ火水じゃなかったら
+    eventType = isEvent[1]; // イベントは赤B
+} else if(getLosTime().los_today % 6 === 5 && !isEvent[2].skip.includes(getLosTime().los_weekday)){ // 今日が5日かつ水木じゃなかったら
+    eventType = isEvent[2]; // イベントは赤C
+} else if(getLosTime().los_today % 4 === 2 && !isEvent[3].skip.includes(getLosTime().los_weekday)){ // 今日が2日かつ日月じゃなかったら
+    eventType = isEvent[3]; // イベントは黒A
+} else if(getLosTime().los_today % 4 === 0 && !isEvent[4].skip.includes(getLosTime().los_weekday)){ // 今日が4日かつ日土じゃなかったら
+    eventType = isEvent[4]; // イベントは黒B
+} else {
+    eventType = "noEvent"; // イベントなし
+}
+
+console.log(eventType);
+
+// 場所の表示
 
 let venue ;
 
@@ -152,128 +209,77 @@ switch (getLosTime().los_today){
         break;
 }
 
-// 開催判定
-
-let isEvent ;
-
-if (getLosTime().los_today % 6 === 1 && getLosTime().los_weekday !== "Mon" && getLosTime().los_weekday !== "Tue") {
-    isEvent = "赤A開催";
-} else if(getLosTime().los_today % 6 === 3 && getLosTime().los_weekday !== "Tue" && getLosTime().los_weekday !== "Wed") {
-    isEvent = "赤B開催";
-} else if(getLosTime().los_today % 6 === 5 && getLosTime().los_weekday !== "Wed" && getLosTime().los_weekday !== "Thu") {
-    isEvent = "赤C開催";
-} else if(getLosTime().los_today % 4 === 2 && getLosTime().los_weekday !== "Sun" && getLosTime().los_weekday !== "Mon") {
-    isEvent = "黒A開催";
-} else if(getLosTime().los_today % 4 === 0 && getLosTime().los_weekday !== "Sat" && getLosTime().los_weekday !== "Sun") {
-    isEvent = "黒B開催";
+if (eventType !== "noEvent"){
+    document.getElementById("today_location").textContent = venue;
 } else {
-    isEvent = "開催なし";
+    document.getElementById("today_location").textContent = "";
 }
 
-// console.log(isEvent);
+// 背景の表示
 
-// 背景
-
-if(isEvent !== "開催なし" && venue === "草原・洞窟"){
+if(eventType !== "noEvent" && venue === "草原・洞窟"){
     document.body.style.backgroundImage = "url('images/DP_cave.png')";
-} else if(isEvent !== "開催なし" && venue === "雨林・神殿前"){
+} else if(eventType !== "noEvent" && venue === "雨林・神殿前"){
     document.body.style.backgroundImage = "url('images/HF_boneyard.png')";
-} else if(isEvent !== "開催なし" && venue === "峡谷・夢見"){
+} else if(eventType !== "noEvent" && venue === "峡谷・夢見"){
     document.body.style.backgroundImage = "url('images/VT_dream.png')";
-} else if(isEvent !== "開催なし" && venue === "捨てられた地・最初のエリア"){
+} else if(eventType !== "noEvent" && venue === "捨てられた地・最初のエリア"){
     document.body.style.backgroundImage = "url('images/GW_outer.png')";
-} else if(isEvent !== "開催なし" && venue === "書庫・星月夜（海月の入り江）"){
+} else if(eventType !== "noEvent" && venue === "書庫・星月夜（海月の入り江）"){
     document.body.style.backgroundImage = "url('images/VK_jellyfish.png')";
-} else if(isEvent !== "開催なし" && venue === "草原・神殿前"){
+} else if(eventType !== "noEvent" && venue === "草原・神殿前"){
     document.body.style.backgroundImage = "url('images/DP_temple.png')";
-} else if(isEvent !== "開催なし" && venue === "雨林・神殿奥"){
+} else if(eventType !== "noEvent" && venue === "雨林・神殿奥"){
     document.body.style.backgroundImage = "url('images/HF_temple.png')";
-} else if(isEvent !== "開催なし" && venue === "峡谷・スケートリンク"){
+} else if(eventType !== "noEvent" && venue === "峡谷・スケートリンク"){
     document.body.style.backgroundImage = "url('images/VT_icerink.png')";
-} else if(isEvent !== "開催なし" && venue === "捨てられた地・座礁船"){
+} else if(eventType !== "noEvent" && venue === "捨てられた地・座礁船"){
     document.body.style.backgroundImage = "url('images/GW_crab.png')";
-} else if(isEvent !== "開催なし" && venue === "書庫・星月夜（バラの先）"){
+} else if(eventType !== "noEvent" && venue === "書庫・星月夜（バラの先）"){
     document.body.style.backgroundImage = "url('images/VK_desert.png')";
-} else if(isEvent !== "開催なし" && venue === "草原・楽園"){
+} else if(eventType !== "noEvent" && venue === "草原・楽園"){
     document.body.style.backgroundImage = "url('images/DP_sanctuary.png')";
-} else if(isEvent !== "開催なし" && venue === "雨林・小川"){
+} else if(eventType !== "noEvent" && venue === "雨林・小川"){
     document.body.style.backgroundImage = "url('images/HF_brook.png')";
-} else if(isEvent !== "開催なし" && venue === "捨てられた地・戦場"){
+} else if(eventType !== "noEvent" && venue === "捨てられた地・戦場"){
     document.body.style.backgroundImage = "url('images/GW_battlefield.png')";
-} else if(isEvent !== "開催なし" && venue === "草原・蝶々の住処"){
+} else if(eventType !== "noEvent" && venue === "草原・蝶々の住処"){
     document.body.style.backgroundImage = "url('images/DP_butterfly.png')";
-} else if(isEvent !== "開催なし" && venue === "雨林・晴れ間"){
+} else if(eventType !== "noEvent" && venue === "雨林・晴れ間"){
     document.body.style.backgroundImage = "url('images/HF_clearing.png')";
-} else if(isEvent !== "開催なし" && venue === "捨てられた地・墓所"){
+} else if(eventType !== "noEvent" && venue === "捨てられた地・墓所"){
     document.body.style.backgroundImage = "url('images/GW_graveyard.png')";
-} else if(isEvent !== "開催なし" && venue === "草原・鳥の巣"){
+} else if(eventType !== "noEvent" && venue === "草原・鳥の巣"){
     document.body.style.backgroundImage = "url('images/DP_birdnest.png')";
-} else if(isEvent !== "開催なし" && venue === "峡谷・隠者"){
+} else if(eventType !== "noEvent" && venue === "峡谷・隠者"){
     document.body.style.backgroundImage = "url('images/VT_hermit.png')";
-} else if(isEvent !== "開催なし" && venue === "雨林・ツリーハウス"){
+} else if(eventType !== "noEvent" && venue === "雨林・ツリーハウス"){
     document.body.style.backgroundImage = "url('images/HF_treehouse.png')";
-} else if(isEvent !== "開催なし" && venue === "捨てられた地・方舟"){
+} else if(eventType !== "noEvent" && venue === "捨てられた地・方舟"){
     document.body.style.backgroundImage = "url('images/GW_ark.png')";
 } else {
     document.body.style.backgroundImage = "url('images/no_event.png')";
 }
 
-// 開催場所の表示
+// 時間の表示
 
-if(isEvent !== "開催なし"){
-    document.getElementById("today_location").textContent = venue;
-    // document.getElementById("no_event").textContent = "本日の闇の破片はありません";  // 後で消す
-} else {
-    document.getElementById("today_location").textContent = "";
-    document.getElementById("no_event").textContent = "本日の闇の破片はありません";
-}
-
-// 日付をまたいだ時の自動リロード
-
-function reload(){
-    const los_now = new Date();
-
-    const formatter = new Intl.DateTimeFormat ("en-US", {
-        timeZone: "America/los_Angeles",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        hour12: false
-    });
-
-    const parts = formatter.formatToParts (los_now);
-    const los_hour = Number (parts.find(part => part.type === "hour").value); // ロスの時間
-    const los_minute = Number (parts.find(part => part.type === "minute").value); // ロスの分
-    const los_second = Number (parts.find(part => part.type === "second").value); // ロスの秒  
-
-    if (los_hour === 0 && los_minute === 0 && los_second === 0){
-        location.reload();
-    }
-
-    setTimeout(reload, 1000);
-}
-
-reload();
-
-// 時間表記
-
-if (isEvent === "赤A開催"){
+if (eventType.type === "赤A"){
     document.querySelector(".event_1").textContent = "23:50 - 03:40";
     document.querySelector(".event_2").textContent = "05:50 - 09:40";
     document.querySelector(".event_3").textContent = "11:50 - 15:40";
-} else if (isEvent === "赤B開催"){
+} else if (eventType.type === "赤B"){
     document.querySelector(".event_1").textContent = "18:30 - 22:20";
     document.querySelector(".event_2").textContent = "00:30 - 04:20";
     document.querySelector(".event_3").textContent = "06:30 - 10:20";
-} else if (isEvent === "赤C開催"){
+} else if (eventType.type === "赤C"){
     document.querySelector(".event_1").textContent = "19:40 - 23:30";
     document.querySelector(".event_2").textContent = "01:40 - 05:30";
     document.querySelector(".event_3").textContent = "07:40 - 11:30";
-} else if (isEvent === "黒A開催"){
+} else if (eventType.type === "黒A"){
     document.querySelector(".event_1").textContent = "18:20 - 22:10";
     document.querySelector(".event_2").textContent = "02:20 - 06:10";
     document.querySelector(".event_3").textContent = "10:20 - 14:10";
-} else if (isEvent === "黒B開催"){
+} else if (eventType.type === "黒B"){
     document.querySelector(".event_1").textContent = "18:00 - 21:50";
     document.querySelector(".event_2").textContent = "02:00 - 05:50";
     document.querySelector(".event_3").textContent = "10:00 - 13:50";
@@ -283,102 +289,63 @@ if (isEvent === "赤A開催"){
     document.querySelector(".event_3").textContent = "";
 }
 
-// 時間の枠
+// 時間の色と枠の表示
 
-let currentMinute = getLosTime().los_hour * 60 + getLosTime().los_minute;
-let event_1;
-let event_2;
-let event_3;
-
-if (isEvent === "赤A開催"){
-    if (currentMinute >= 470 && currentMinute < 700){
-        event_1 = true;
-    } else if (currentMinute >= 830 && currentMinute < 1060){
-        event_2 = true;
-    } else if (currentMinute >= 1190 && currentMinute < 1420){
-        event_3 = true;
-    } else {
-        event_1 = false;
-        event_2 = false;
-        event_3 = false;
-    }
-} else if (isEvent === "赤B開催"){
-    if (currentMinute >= 150 && currentMinute < 380){
-        event_1 = true;
-    } else if (currentMinute >= 510 && currentMinute < 740){
-        event_2 = true;
-    } else if (currentMinute >= 870 && currentMinute < 1100){
-        event_3 = true;
-    } else {
-        event_1 = false;
-        event_2 = false;
-        event_3 = false;
-    }
-} else if (isEvent === "赤C開催"){
-    if (currentMinute >= 220 && currentMinute < 450){
-        event_1 = true;
-    } else if (currentMinute >= 580 && currentMinute < 810){
-        event_2 = true;
-    } else if (currentMinute >= 940 && currentMinute < 1170){
-        event_3 = true;
-    } else {
-        event_1 = false;
-        event_2 = false;
-        event_3 = false;
-    }
-} else if (isEvent === "黒A開催"){
-    if (currentMinute >= 140 && currentMinute < 370){
-        event_1 = true;
-    } else if (currentMinute >= 620 && currentMinute < 850){
-        event_2 = true;
-    } else if (currentMinute >= 1100 && currentMinute < 1330){
-        event_3 = true;
-    } else {
-        event_1 = false;
-        event_2 = false;
-        event_3 = false;
-    }
-} else if (isEvent === "黒B開催"){
-    if (currentMinute >= 120 && currentMinute < 350){
-        event_1 = true;
-    } else if (currentMinute >= 600 && currentMinute < 830){
-        event_2 = true;
-    } else if (currentMinute >= 1080 && currentMinute < 1310){
-        event_3 = true;
-    } else {
-        event_1 = false;
-        event_2 = false;
-        event_3 = false;
-    }
-} else {
-    event_1 = false;
-    event_2 = false;
-    event_3 = false;
-}
-
-if (event_1 === true){
+if (eventType.type !== "noEvent"){
+    if (getLosTime().los_time >= eventType.time1[0] && getLosTime().los_time < eventType.time1[1]){
     document.querySelector(".event_1").style.border = "2px solid #FEFDF2";
     document.querySelector(".event_1").style.color = "#FEFDF2";
-} else {
+    } else {
     document.querySelector(".event_1").style.border = "none";
     document.querySelector(".event_1").style.color = "#848484";
-}
+    }
 
-if (event_2 === true){
+    if (getLosTime().los_time >= eventType.time2[0] && getLosTime().los_time < eventType.time2[1]){
     document.querySelector(".event_2").style.border = "2px solid #FEFDF2";
     document.querySelector(".event_2").style.color = "#FEFDF2";
-} else {
+    } else {
     document.querySelector(".event_2").style.border = "none";
     document.querySelector(".event_2").style.color = "#848484";
-}
+    }
 
-if (event_3 === true){
+    if (getLosTime().los_time >= eventType.time3[0] && getLosTime().los_time < eventType.time3[1]){
     document.querySelector(".event_3").style.border = "2px solid #FEFDF2";
     document.querySelector(".event_3").style.color = "#FEFDF2";
-} else {
+    } else {
     document.querySelector(".event_3").style.border = "none";
     document.querySelector(".event_3").style.color = "#848484";
+    }
+} else {
+    document.querySelector(".event_1").style.border = "none";
+    document.querySelector(".event_2").style.border = "none";
+    document.querySelector(".event_3").style.border = "none";
 }
 
-console.log("経過分: " + currentMinute);
-console.log(event_1, event_2, event_3);
+// 画面の自動リロード
+
+function reload(){
+    if (getLosTime().los_time === 0){
+        location.reload(); // 日本時間16時
+        return;
+    }
+
+    if (getLosTime().los_time === eventType.time1[0] || getLosTime().los_time === eventType.time1[1]){
+        location.reload(); // time1の開始と終了時
+        return;
+    }
+
+    if (getLosTime().los_time === eventType.time2[0] || getLosTime().los_time === eventType.time2[1]){
+        location.reload(); // time2の開始と終了時
+        return;
+    }
+
+    if (getLosTime().los_time === eventType.time3[0] || getLosTime().los_time === eventType.time3[1]){
+        location.reload(); // time3の開始と終了時
+        return;
+    }
+
+    // console.log("リロード判定中");
+    setInterval(reload, 1000);
+}
+
+reload();
