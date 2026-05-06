@@ -128,7 +128,7 @@ h1{
     font-weight: 400;
     position: fixed;
     left: 1em;
-    bottom: 2em;
+    bottom:60px;
     margin: 0;
 }
 
@@ -144,19 +144,22 @@ h1{
     align-items: center;
 }
 
+@media (max-width: 600px){
+    .event_container{
+        font-size: 0.8em;
+    }
+}
+
 #no_event{
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 400;
     margin: 0;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 45%;
 }
 
 .event_1{
     font-size: 2.5em;
-    font-weight: 400;
     position: absolute;
     padding: 0 0.8em 0 0.8em;
     margin: 0;
@@ -166,7 +169,6 @@ h1{
 
 .event_2{
     font-size: 2.5em;
-    font-weight: 400;
     position: absolute;
     margin: 0;
     padding: 0 0.8em 0 0.8em;
@@ -176,7 +178,6 @@ h1{
 
 .event_3{
     font-size: 2.5em;
-    font-weight: 400;
     position: absolute;
     padding: 0 0.8em 0 0.8em;
     margin: 0;
