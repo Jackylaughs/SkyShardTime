@@ -164,7 +164,7 @@ h1{
     padding: 0 0.8em 0 0.8em;
     margin: 0;
     border-radius: 2em;
-    top: 38%;
+    top: 34%;
 }
 
 .event_2{
@@ -173,7 +173,7 @@ h1{
     margin: 0;
     padding: 0 0.8em 0 0.8em;
     border-radius: 2em;
-    top: 45%;
+    top: 41%;
 }
 
 .event_3{
@@ -182,5 +182,70 @@ h1{
     padding: 0 0.8em 0 0.8em;
     margin: 0;
     border-radius: 2em;
-    top: 52%;
+    top: 48%;
+}
+
+#countdown{
+    font-size: 2.0em;
+    font-weight: 400;
+    position: absolute;
+    margin: 0;
+    top: 58%;
+}
+
+/* ロード画面 */
+
+.loading_container{
+    background-color: #57D3F9;
+    z-index: 20;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.loaded{
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.load_bg{
+    height: 400px;
+    width: 400px;
+    margin: 0;
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    /* border: 2px solid #800000; */
+}
+
+.loading_icon{
+    height: 8em;
+    width: 8em;
+    position: absolute;
+    top: 20%;
+}
+
+.load_text{
+    color: #FEFDF2;
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 32%;
+}
+
+@media (max-width: 600px){
+    .loading_container{
+        font-size: 0.8em;
+    }
+    .loading_icon{
+        top: 25%
+    }
+    .load_text{
+        bottom: 37%;
+    }
 }

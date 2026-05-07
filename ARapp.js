@@ -349,3 +349,12 @@ function reload(){
 }
 
 reload();
+
+// ロード画面
+
+window.onload = function(){
+    setTimeout(() => {
+        const loader = document.querySelector(".loading_container");
+        loader.classList.add("loaded");
+    }, 1000);
+};
