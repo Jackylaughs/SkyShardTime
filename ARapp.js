@@ -35,11 +35,36 @@ const menuButton = document.querySelector(".menu_button");
 const menuOpen = document.querySelector(".menu_container");
 const menuOpen_main = document.querySelector(".main_content");
 
+let isOpen = false;
+let timer;
+
 menuButton.addEventListener("click", () => {
     menuButton.classList.toggle ("open");
-    menuOpen.classList.toggle ("open");
     menuOpen_main.classList.toggle ("open");
+
+    clearTimeout(timer);
+
+    if (isOpen) {
+        isOpen = false;
+        console.log(isOpen);
+        menuOpen.classList.remove ("open");
+        menuOpen.addEventListener("transitionend", () => {
+            if (!isOpen){
+                menuOpen.style.display = "none";
+            }
+        })
+    } else {
+        isOpen = true;
+        console.log(isOpen);
+        menuOpen.style.display = "flex";
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                menuOpen.classList.add ("open");
+            })
+        })
+    }
 });
+
 
 // ロスの時間 { 曜日, 日付, 時間(秒) }
 
@@ -356,9 +381,14 @@ reload();
 
 // ロード画面
 
+const loader = document.querySelector(".loading_container");
+
 window.onload = function(){
     setTimeout(() => {
-        const loader = document.querySelector(".loading_container");
         loader.classList.add("loaded");
     }, 1000);
+
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 2000);
 };
