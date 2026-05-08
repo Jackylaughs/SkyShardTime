@@ -29,12 +29,16 @@ setInterval(displayTime, 1000);
 
 displayTime();
 
-// メニューボタン
+// メニューボタンとメニュー表示
 
 const menuButton = document.querySelector(".menu_button");
+const menuOpen = document.querySelector(".menu_container");
+const menuOpen_main = document.querySelector(".main_content");
 
 menuButton.addEventListener("click", () => {
     menuButton.classList.toggle ("open");
+    menuOpen.classList.toggle ("open");
+    menuOpen_main.classList.toggle ("open");
 });
 
 // ロスの時間 { 曜日, 日付, 時間(秒) }
