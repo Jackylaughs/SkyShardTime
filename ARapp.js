@@ -24,10 +24,11 @@ const currentTime = hour + ":" + minute + ":" + second;
 
 document.getElementById("clock").textContent = currentTime;
 
-setInterval(displayTime, 1000);
+
 }
 
 displayTime();
+setInterval(displayTime, 1000);
 
 // メニューボタンとメニュー表示
 
@@ -94,7 +95,7 @@ function getLosTime(){
     return { los_weekday, los_today, los_time };
 }
 
-setInterval(getLosTime, 1000)
+// setInterval(getLosTime, 1000)
 // setInterval(() => {
 //     console.log(getLosTime());
 // }, 1000);
@@ -374,10 +375,11 @@ function reload(){
     }
 
     // console.log("リロード判定中");
-    setInterval(reload, 1000);
+    
 }
 
 reload();
+setInterval(reload, 1000);
 
 // ロード画面
 
