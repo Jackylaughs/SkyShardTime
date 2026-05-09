@@ -47,7 +47,7 @@ menuButton.addEventListener("click", () => {
 
     if (isOpen) {
         isOpen = false;
-        console.log(isOpen);
+        // console.log(isOpen);
         menuOpen.classList.remove ("open");
         menuOpen.addEventListener("transitionend", () => {
             if (!isOpen){
@@ -56,7 +56,7 @@ menuButton.addEventListener("click", () => {
         })
     } else {
         isOpen = true;
-        console.log(isOpen);
+        // console.log(isOpen);
         menuOpen.style.display = "flex";
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -394,3 +394,66 @@ window.onload = function(){
         loader.style.display = "none";
     }, 2000);
 };
+
+// カウントダウン
+
+let countdownRem;
+let countdownMinute;
+let countdownHour;
+let countdownSecond;
+
+let countdownText;
+let countdownTime;
+
+function countdown() {
+    if (eventType.type !== "noEvent"){
+        if (getLosTime().los_time < eventType.time1[0]){
+            countdownRem = eventType.time1[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time1[0] && getLosTime().los_time < eventType.time1[1]){
+            countdownRem = eventType.time1[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time1[1] && getLosTime().los_time < eventType.time2[0]){
+            countdownRem = eventType.time2[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time2[0] && getLosTime().los_time < eventType.time2[1]){
+            countdownRem = eventType.time2[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time2[1] && getLosTime().los_time < eventType.time3[0]){
+            countdownRem = eventType.time3[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time3[0] && getLosTime().los_time < eventType.time3[1]){
+            countdownRem = eventType.time3[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time3[1]){
+            countdownText = "今日の噴出は終了しました";
+        }
+
+        countdownHour = Math.floor(countdownRem / 3600);
+        countdownMinute = Math.floor((countdownRem % 3600) / 60);
+        countdownSecond = Math.floor(countdownRem % 60);
+
+        if (countdownMinute < 10) {
+            countdownMinute = "0" + countdownMinute;
+        }
+
+        if (countdownSecond < 10) {
+            countdownSecond = "0" + countdownSecond;
+        }
+
+        countdownTime = "0" + countdownHour + ":" + countdownMinute + ":" + countdownSecond;
+
+        if (getLosTime().los_time >= eventType.time3[1]){
+            countdownTime = "";
+        }
+
+        document.querySelector(".countdown_text").textContent = countdownText;
+        document.querySelector(".countdown_number").textContent = countdownTime;
+    } else {
+        document.querySelector(".countdown_text").textContent = "";
+        document.querySelector(".countdown_number").textContent = "";
+    }
+}
+
+countdown();
+setInterval(countdown, 1000);
