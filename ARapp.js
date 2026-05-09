@@ -319,6 +319,14 @@ if (eventType.type === "赤A"){
     document.querySelector(".event_3").textContent = "";
 }
 
+const noEvent = document.querySelector("#no_event");
+
+if (eventType === "noEvent"){
+    noEvent.classList.remove("hidden");
+} else {
+    noEvent.classList.add("hidden");
+}
+
 // 時間の色と枠の表示
 
 if (eventType.type !== "noEvent"){
