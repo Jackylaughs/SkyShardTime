@@ -210,20 +210,27 @@ h1{
     }
 }
 
+
+/* 場所 */
+
 #today_location{
     font-size: 2em;
     font-weight: 400;
     position: fixed;
-    left: 1em;
+    left: 30px;
     bottom:60px;
     margin: 0;
 }
 
 @media (max-width: 600px){
     #today_location{
-        font-size: 1.6em;
+        font-size: 1.4em;
+        left: 16px;
     }
 }
+
+
+/* 時間 */
 
 .event_container{
     display: flex;
