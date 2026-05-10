@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>闇の破片の時間</title>
-    <meta name="description" content="闇の破片が落ちる時間と場所をリアルタイムで確認">
+    <meta name="description" content="
+        Sky 星を紡ぐ子どもたちの闇の破片が落ちる時間と場所をリアルタイムで確認！
+        このサイトは非公式です。誤った情報を掲載する場合がありますので、参考程度にご利用ください。
+    ">
 
     <link rel="stylesheet" href="./sanitize.css">
     <link rel="stylesheet" href="./style_02.css">
@@ -12,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="favicon.png" type="image/x-icon">
 </head>
 <body>
     <div class="header_wrap">
@@ -28,18 +33,43 @@
         </header>
     </div>
 
-    <div class="event_container">
-        <h2 id="no_event"></h2>
-        <p class="event_1"></p>
-        <p class="event_2"></p>
-        <p class="event_3"></p>
+    <nav class="menu_container">
+        <ul class="menu">
+            <li>
+                <button>時間の決まり方</button>
+            </li>
+            <li>
+                <button>その他1</button>
+            </li>
+            <li>
+                <button>その他2</button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main_content">
+        <h2 id="no_event">今日の噴出はありません</h2>
+        <div class="event_container">
+            <div class="eventTime_wrap">
+                <p class="event_1"></p>
+                <p class="event_2"></p>
+                <p class="event_3"></p>
+            </div>
+            <h2 id="countdown"><span class="countdown_text"></span> <span class="countdown_number"></span></h2>
+        </div>
+
+        <!-- divを作って種類と場所をまとめる -->
+        <h2 id="pattern">種類：あいうえお</h2> 
+        <h2 id="today_location"><span></span></h2>
     </div>
 
-    <h2 id="today_location"></h2>
-
+    <div class="loading_container">
+        <div class="load_bg">
+            <img src="shard_icon.svg" class="loading_icon">
+            <h2 class="load_text">Now loading...</h2>
+        </div>
     </div>
 
-    <!-- <script src="./SkyShardTime_script.js"></script> -->
     <script src="./ARapp.js"></script>
 </body>
 </html>

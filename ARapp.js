@@ -24,18 +24,48 @@ const currentTime = hour + ":" + minute + ":" + second;
 
 document.getElementById("clock").textContent = currentTime;
 
-setTimeout(displayTime, 1000);
+
 }
 
 displayTime();
+setInterval(displayTime, 1000);
 
-// メニューボタン
+// メニューボタンとメニュー表示
 
 const menuButton = document.querySelector(".menu_button");
+const menuOpen = document.querySelector(".menu_container");
+const menuOpen_main = document.querySelector(".main_content");
+
+let isOpen = false;
+let timer;
 
 menuButton.addEventListener("click", () => {
     menuButton.classList.toggle ("open");
+    menuOpen_main.classList.toggle ("open");
+
+    clearTimeout(timer);
+
+    if (isOpen) {
+        isOpen = false;
+        // console.log(isOpen);
+        menuOpen.classList.remove ("open");
+        menuOpen.addEventListener("transitionend", () => {
+            if (!isOpen){
+                menuOpen.style.display = "none";
+            }
+        })
+    } else {
+        isOpen = true;
+        // console.log(isOpen);
+        menuOpen.style.display = "flex";
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                menuOpen.classList.add ("open");
+            })
+        })
+    }
 });
+
 
 // ロスの時間 { 曜日, 日付, 時間(秒) }
 
@@ -65,7 +95,7 @@ function getLosTime(){
     return { los_weekday, los_today, los_time };
 }
 
-setInterval(getLosTime, 1000)
+// setInterval(getLosTime, 1000)
 // setInterval(() => {
 //     console.log(getLosTime());
 // }, 1000);
@@ -289,6 +319,14 @@ if (eventType.type === "赤A"){
     document.querySelector(".event_3").textContent = "";
 }
 
+const noEvent = document.querySelector("#no_event");
+
+if (eventType === "noEvent"){
+    noEvent.classList.remove("hidden");
+} else {
+    noEvent.classList.add("hidden");
+}
+
 // 時間の色と枠の表示
 
 if (eventType.type !== "noEvent"){
@@ -345,7 +383,85 @@ function reload(){
     }
 
     // console.log("リロード判定中");
-    setInterval(reload, 1000);
+    
 }
 
 reload();
+setInterval(reload, 1000);
+
+// ロード画面
+
+const loader = document.querySelector(".loading_container");
+
+window.onload = function(){
+    setTimeout(() => {
+        loader.classList.add("loaded");
+    }, 1000);
+
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 2000);
+};
+
+// カウントダウン
+
+let countdownRem;
+let countdownMinute;
+let countdownHour;
+let countdownSecond;
+
+let countdownText;
+let countdownTime;
+
+function countdown() {
+    if (eventType.type !== "noEvent"){
+        if (getLosTime().los_time < eventType.time1[0]){
+            countdownRem = eventType.time1[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time1[0] && getLosTime().los_time < eventType.time1[1]){
+            countdownRem = eventType.time1[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time1[1] && getLosTime().los_time < eventType.time2[0]){
+            countdownRem = eventType.time2[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time2[0] && getLosTime().los_time < eventType.time2[1]){
+            countdownRem = eventType.time2[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time2[1] && getLosTime().los_time < eventType.time3[0]){
+            countdownRem = eventType.time3[0] - getLosTime().los_time;
+            countdownText = "開始まで";
+        } else if (getLosTime().los_time >= eventType.time3[0] && getLosTime().los_time < eventType.time3[1]){
+            countdownRem = eventType.time3[1] - getLosTime().los_time;
+            countdownText = "終了まで";
+        } else if (getLosTime().los_time >= eventType.time3[1]){
+            countdownText = "今日の噴出は終了しました";
+        }
+
+        countdownHour = Math.floor(countdownRem / 3600);
+        countdownMinute = Math.floor((countdownRem % 3600) / 60);
+        countdownSecond = Math.floor(countdownRem % 60);
+
+        if (countdownMinute < 10) {
+            countdownMinute = "0" + countdownMinute;
+        }
+
+        if (countdownSecond < 10) {
+            countdownSecond = "0" + countdownSecond;
+        }
+
+        countdownTime = "0" + countdownHour + ":" + countdownMinute + ":" + countdownSecond;
+
+        if (getLosTime().los_time >= eventType.time3[1]){
+            countdownTime = "";
+        }
+
+        document.querySelector(".countdown_text").textContent = countdownText;
+        document.querySelector(".countdown_number").textContent = countdownTime;
+    } else {
+        document.querySelector(".countdown_text").textContent = "";
+        document.querySelector(".countdown_number").textContent = "";
+    }
+}
+
+countdown();
+setInterval(countdown, 1000);

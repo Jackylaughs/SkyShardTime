@@ -29,10 +29,10 @@ body{
 /* ヘッダー */
 
 header{
-    padding-top: 0.4em;
+    padding-top: 0.6em;
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 30;
 }
 
 .header_container{
@@ -54,13 +54,14 @@ h1{
 .menu_button{
     background-color: transparent;
     transition: all 0.3s;
-    border-radius: 5px;
+    border-radius: 4px;
     border: none;
     position: absolute;
-    right: 0.45em;
+    top: 12px;
+    right: 12px;
     margin: auto 0;
     padding: 24px;
-    z-index: 10;
+    z-index: 30;
 }
 
 @media (hover: hover){ /* PC用 */
@@ -112,6 +113,82 @@ h1{
     top: 24px;
 }
 
+
+/* メニュー */
+
+.menu_container{
+    /* background-color: #00000080; */
+    height: 100dvh;
+    width: 100%;
+    display: none;
+    position: fixed;
+
+    opacity: 0;
+    z-index: 15;
+    transition: all 0.4s;
+}
+
+.menu_container.open{
+    opacity: 1;
+}
+
+.menu{
+    background-color: #00000080;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: max-content;
+    padding: 58px 10px 10px 10px;
+    margin: 0;
+    position: absolute;
+    list-style: none;
+    top: 6px;
+    right: 6px;
+    gap: 4px;
+    border-radius: 4px;
+}
+
+.menu li{
+    border-radius: 0.2em;
+    transition: all 0.2s;
+    text-align: right;
+}
+
+.menu li:hover{
+    background-color: #ffffff20;
+}
+
+.menu li button{
+    color: #FEFDF2;
+    background-color: #00000000;
+    font-family: "Zen Maru Gothic";
+    font-weight: 400;
+    font-size: 1.6em;
+    padding: 8px 22px;
+    margin: 0;
+    border: none;
+}
+
+@media (max-width: 1024px){
+    .menu{
+        padding: 10px;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    .menu li{
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px){
+    .menu li button{
+        font-size: 1.4em;
+    }
+}
+
+
 /* 時計 */
 
 #clock{
@@ -123,25 +200,71 @@ h1{
 
 /* メイン */
 
+.main_content{
+    display: flex;
+    position: relative;
+    height: 100dvh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s;
+}
+
+@media (max-width: 1024px){
+    .main_content.open{
+    opacity: 0;
+    }
+}
+
+
+/* 場所 */
+
 #today_location{
     font-size: 2em;
     font-weight: 400;
     position: fixed;
-    left: 1em;
+    left: 30px;
     bottom:60px;
     margin: 0;
 }
 
 @media (max-width: 600px){
     #today_location{
-        font-size: 1.6em;
+        font-size: 1.4em;
+        left: 16px;
     }
 }
 
+
+/* 破片の種類 */
+
+#pattern{
+    font-size: 2em;
+    font-weight: 400;
+    position: fixed;
+    left: 30px;
+    bottom:100px;
+    margin: 0;
+}
+
+@media (max-width: 600px){
+    #pattern{
+        font-size: 1.4em;
+        left: 16px;
+    }
+}
+
+
+/* 時間 */
+
 .event_container{
     display: flex;
+    position: absolute;
+    height: max-content;
+    width: max-content;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
 }
 
 @media (max-width: 600px){
@@ -155,32 +278,121 @@ h1{
     font-weight: 400;
     margin: 0;
     position: absolute;
-    top: 45%;
+}
+
+#no_event.hidden{
+    display: none;
+}
+
+@media (max-width: 600px){
+    #no_event{
+        font-size: 1.5em;
+    }
+}
+
+.eventTime_wrap{
+    display: flex;
+    position: relative;
+    height: max-content;
+    width: max-content;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 600px){
+    .eventTime_wrap{
+        gap: 4px;
+    }
 }
 
 .event_1{
     font-size: 2.5em;
-    position: absolute;
+    position: relative;
     padding: 0 0.8em 0 0.8em;
     margin: 0;
     border-radius: 2em;
-    top: 38%;
 }
 
 .event_2{
     font-size: 2.5em;
-    position: absolute;
+    position: relative;
     margin: 0;
     padding: 0 0.8em 0 0.8em;
     border-radius: 2em;
-    top: 45%;
 }
 
 .event_3{
     font-size: 2.5em;
-    position: absolute;
+    position: relative;
     padding: 0 0.8em 0 0.8em;
     margin: 0;
     border-radius: 2em;
-    top: 52%;
+}
+
+#countdown{
+    font-size: 2.0em;
+    font-weight: 400;
+    position: relative;
+    margin: 0;
+}
+
+
+/* ロード画面 */
+
+.loading_container{
+    background: linear-gradient(180deg, #4bc9f0, #84defa);
+    z-index: 50;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.loaded{
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.load_bg{
+    height: 400px;
+    width: 400px;
+    margin: 0;
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    /* border: 2px solid #800000; */
+}
+
+.loading_icon{
+    height: 8em;
+    width: 8em;
+    position: absolute;
+    top: 20%;
+}
+
+.load_text{
+    color: #FEFDF2;
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 32%;
+}
+
+@media (max-width: 600px){
+    .loading_container{
+        font-size: 0.8em;
+    }
+    .loading_icon{
+        top: 25%
+    }
+    .load_text{
+        bottom: 37%;
+    }
 }
