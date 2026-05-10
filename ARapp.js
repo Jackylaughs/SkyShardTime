@@ -329,7 +329,7 @@ if (eventType === "noEvent"){
 
 // 時間の色と枠の表示
 
-if (eventType.type !== "noEvent"){
+if (eventType !== "noEvent"){
     if (getLosTime().los_time >= eventType.time1[0] && getLosTime().los_time < eventType.time1[1]){
     document.querySelector(".event_1").style.border = "2px solid #FEFDF2";
     document.querySelector(".event_1").style.color = "#FEFDF2";
@@ -367,21 +367,22 @@ function reload(){
         return;
     }
 
-    if (getLosTime().los_time === eventType.time1[0] || getLosTime().los_time === eventType.time1[1]){
-        location.reload(); // time1の開始と終了時
-        return;
-    }
+    if (eventType !== "noEvent"){
+        if (getLosTime().los_time === eventType.time1[0] || getLosTime().los_time === eventType.time1[1]){
+            location.reload(); // time1の開始と終了時
+            return;
+        }
 
-    if (getLosTime().los_time === eventType.time2[0] || getLosTime().los_time === eventType.time2[1]){
-        location.reload(); // time2の開始と終了時
-        return;
-    }
+        if (getLosTime().los_time === eventType.time2[0] || getLosTime().los_time === eventType.time2[1]){
+            location.reload(); // time2の開始と終了時
+            return;
+        }
 
-    if (getLosTime().los_time === eventType.time3[0] || getLosTime().los_time === eventType.time3[1]){
-        location.reload(); // time3の開始と終了時
-        return;
-    }
-
+        if (getLosTime().los_time === eventType.time3[0] || getLosTime().los_time === eventType.time3[1]){
+            location.reload(); // time3の開始と終了時
+            return;
+        }
+}
     // console.log("リロード判定中");
     
 }
@@ -414,7 +415,7 @@ let countdownText;
 let countdownTime;
 
 function countdown() {
-    if (eventType.type !== "noEvent"){
+    if (eventType !== "noEvent"){
         if (getLosTime().los_time < eventType.time1[0]){
             countdownRem = eventType.time1[0] - getLosTime().los_time;
             countdownText = "開始まで";
