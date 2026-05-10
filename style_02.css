@@ -239,12 +239,17 @@ h1{
 /* 破片の種類 */
 
 #pattern{
+    display: block;
     font-size: 2em;
     font-weight: 400;
     position: fixed;
     left: 30px;
     bottom:100px;
     margin: 0;
+}
+
+#pattern.hidden{
+    display: none;
 }
 
 @media (max-width: 600px){
