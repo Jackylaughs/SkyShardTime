@@ -281,6 +281,7 @@ h1{
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    top: 32%
 }
 
 @media (max-width: 600px){
