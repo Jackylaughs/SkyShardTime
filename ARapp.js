@@ -330,7 +330,7 @@ if (candleType === 2){
     candle = "光のかけら x200"
 }
 
-document.querySelector(".pattern").textContent = candle;
+document.querySelector("#pattern").textContent = candle;
 
 // 時間の表示
 

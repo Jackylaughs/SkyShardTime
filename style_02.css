@@ -252,19 +252,19 @@ h1{
 
 /* 破片の種類 */
 
-#pattern_container{
+#pattern{
     display: block;
     font-size: 2em;
     font-weight: 400;
     margin: 0;
 }
 
-#pattern_container.hidden{
+#pattern.hidden{
     display: none;
 }
 
 @media (max-width: 600px){
-    #pattern_container{
+    #pattern{
         font-size: 1.4em;
         left: 16px;
     }
