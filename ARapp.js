@@ -144,22 +144,29 @@ const isEvent = [
 // イベントの種類
 
 let eventType ;
+let candleType ;
 
 if(getLosTime().los_today % 6 === 1 && !isEvent[0].skip.includes(getLosTime().los_weekday)){ // 今日が1日かつ月火じゃなかったら
     eventType = isEvent[0]; // イベントは赤A
+    candleType = 2
 } else if(getLosTime().los_today % 6 === 3 && !isEvent[1].skip.includes(getLosTime().los_weekday)){ // 今日が3日かつ火水じゃなかったら
     eventType = isEvent[1]; // イベントは赤B
+    candleType = 2
 } else if(getLosTime().los_today % 6 === 5 && !isEvent[2].skip.includes(getLosTime().los_weekday)){ // 今日が5日かつ水木じゃなかったら
     eventType = isEvent[2]; // イベントは赤C
+    candleType = 2
 } else if(getLosTime().los_today % 4 === 2 && !isEvent[3].skip.includes(getLosTime().los_weekday)){ // 今日が2日かつ日月じゃなかったら
     eventType = isEvent[3]; // イベントは黒A
+    candleType = 1
 } else if(getLosTime().los_today % 4 === 0 && !isEvent[4].skip.includes(getLosTime().los_weekday)){ // 今日が4日かつ日土じゃなかったら
     eventType = isEvent[4]; // イベントは黒B
+    candleType = 1
 } else {
     eventType = "noEvent"; // イベントなし
+    candleType = 0
 }
 
-console.log(eventType);
+console.log(eventType.type);
 
 // 場所の表示
 
@@ -290,6 +297,40 @@ if(eventType !== "noEvent" && venue === "草原・洞窟"){
 } else {
     document.body.style.backgroundImage = "url('images/no_event.png')";
 }
+
+// キャンドルの種類の表示
+
+let candle ;
+
+if (candleType === 2){
+    switch (venue){
+        case "草原・楽園":
+        case "雨林・ツリーハウス":
+        case "雨林・晴れ間":
+        case "峡谷・隠者":
+        case "捨てられた地・方舟":
+        case "書庫・星月夜（海月の入り江）":
+        case "書庫・星月夜（バラの先）":
+            candle = "星のキャンドル 3.5本";
+            break;
+
+        case "草原・鳥の巣":
+        case "雨林・神殿奥":
+        case "峡谷・夢見":
+        case "捨てられた地・座礁船":
+            candle = "星のキャンドル 2.5本";
+            break;
+
+        case "草原・洞窟":
+        case "捨てられた地・墓所":
+            candle = "星のキャンドル 2.5本";
+            break;
+    }
+} else if (candleType === 1){
+    candle = "光のかけら x200"
+}
+
+document.querySelector(".pattern").textContent = candle;
 
 // 時間の表示
 
